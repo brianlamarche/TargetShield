@@ -5,7 +5,7 @@ import common
 # this says, hey we have a led strip
 # with 32 LED's (pixels) 
 # 
-leds = common.LedPixel(6)
+leds = common.LedPixel(32)
 
 # please turn them all off
 leds.allOff()
