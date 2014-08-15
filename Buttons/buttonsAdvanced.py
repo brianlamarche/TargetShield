@@ -11,25 +11,27 @@ import time
 # and allows you to reuse code anywhere in the program.
 # 
 def turnOnOff(t):
+	#first, let's turn off the lights
+	t.turnAllLedOff()
 	# turn on one by one
 	t.turnLedOn(0)
-	time.sleep(1000)
+	time.sleep(1)
 	t.turnLedOn(1)
-	time.sleep(1000)
+	time.sleep(1)
 	t.turnLedOn(2)
-	time.sleep(1000)
+	time.sleep(1)
 	t.turnLedOn(3)
-	time.sleep(1000)
+	time.sleep(1)
 
 	# turn off one by one
 	t.turnLedOff(3)
-	time.sleep(1000)
+	time.sleep(1)
 	t.turnLedOff(2)
-	time.sleep(1000)
+	time.sleep(1)
 	t.turnLedOff(1)
-	time.sleep(1000)
+	time.sleep(1)
 	t.turnLedOff(0)
-	time.sleep(1000)
+	time.sleep(1)
 
 #
 # this function shows you how to check for buttons
@@ -44,13 +46,13 @@ def checkButtons(t, loopCount):
 	for i in range(0, loopCount):
 		# here we check all buttons - notice
 		# we have another loop inside a loop?
-		# We call this a nested loop (because the loop below
+		# We call this a nested loop (because the loop below)
 		# is nested within the loop above
 		# range is actually a function that specifies 
-		# a list of numbers between 0, and 3
+		# a list of numbers between 0, and 3 (4 is ignored as the upper value)
 		# each time the loop iterates
 		# the button will increment by 1.  
-		for button in range(0, 3):
+		for button in range(0, 4):
 			pressed = t.checkForButtonPress(button)
 			if (pressed == True):
 				t.turnLedOff(button)
@@ -59,7 +61,7 @@ def checkButtons(t, loopCount):
 # does this look familiar?
 t = TargetIo()
 turnOnOff(t)
-checkButtons(t, 1000)
+checkButtons(t, 10000)
 
 #
 # Challenge question:

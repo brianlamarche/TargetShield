@@ -18,17 +18,17 @@ class TargetIo:
 				  2:16,
 				  3:22
 			       }
-		self.buttons = {0:11,
-				     1:15,
-				     2:16,
-				     3:22
+		self.buttons = {0:7,
+				     1:13,
+				     2:12,
+				     3:18
 			          }				
 		self.configure()
 
 	def configure(self):
 		GPIO.setwarnings(False)
 		GPIO.setmode(GPIO.BOARD)
-		for i in range(0, 3):
+		for i in range(0, 4):
 			led    = self.leds[i]
 			button = self.buttons[i]
 			GPIO.setup(button, GPIO.IN)
@@ -40,22 +40,22 @@ class TargetIo:
 			
 	def turnLedOff(self, led):
 		pin 	 = self.leds[led]
-		GPIO.output(pin, True)
+		GPIO.output(pin, False)
 
 	def turnAllLedOff(self):
-		GPIO.setwarnings(False)
-		GPIO.setmode(GPIO.BOARD)
-		for pin in pins:
+		#GPIO.setwarnings(False)
+		#GPIO.setmode(GPIO.BOARD)
+		for pin in self.pins:
 			GPIO.setup(pin,   GPIO.OUT)			
 			GPIO.output(pin, False)
 
-	def turnAllLedOn(self, pins):
-		for pin in pins:
+	def turnAllLedOn(self):
+		for pin in self.pins:
 			GPIO.setup(pin,   GPIO.OUT)			
 			GPIO.output(pin, True)
 
 	def checkForButtonPress(self, button):
-		for target in targets:
+		for pin in self.pins:
 			pin    = self.buttons[button]
 			isHigh = GPIO.input(pin)
 			if (isHigh == SENSOR_HIT):
