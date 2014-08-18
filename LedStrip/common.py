@@ -7,20 +7,38 @@ class LedPixel:
    NUM_LEDS = 32
    def __init__(self, numleds):
       self.NUM_LEDS = numleds
-      self.leds = bytearray(3 * self.NUM_LEDS)
+      #self.leds = bytearray(3 * self.NUM_LEDS)
+      self.gamma = bytearray(256)
+      self.buffer = [0 for x in range(self.NUM_LEDS)]
+      self.wheelOffset = 0
+      for led in range(self.NUM_LEDS):
+          self.buffer[led] = bytearray(3)
+      for i in range(256):
+          # Color calculations from
+          # http://learn.adafruit.com/light-painting-with-raspberry-pi
+          self.gamma[i] = 0x80 | int(
+              pow(float(i) / 255.0, 2.5) * 127.0 + 0.5
+          )
 	
    def writeAll(self):
-      self.spidev.write(self.leds)
+      for x in range(self.NUM_LEDS):
+          self.spidev.write(self.buffer[x])
+          self.spidev.flush()
+      self.spidev.write(bytearray(b'\x00'))
       self.spidev.flush()
+      #self.spidev.write(self.leds)
+      #self.spidev.flush()
+      #self.spidev.write(bytearray(b'\x00'))
+      #self.spidev.flush()
 
    def allOff(self):
       self.allColor(0, 0, 0)
 
    #NOTE: this does not write to strip
    def colorLed(self, index, r, g, b):
-      self.leds[index * 3 + 0] = 0x00 | r
-      self.leds[index * 3 + 1] = 0x00 | g
-      self.leds[index * 3 + 2] = 0x00 | b
+      self.buffer[index][0] = self.gamma[g]
+      self.buffer[index][1] = self.gamma[r]
+      self.buffer[index][2] = self.gamma[b]
       
    def allColor(self, r, g, b):
       for i in range(self.NUM_LEDS - 1):
