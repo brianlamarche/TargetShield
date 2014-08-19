@@ -15,9 +15,6 @@ leds.allOff()
 leds.colorLed(0, 255, 	127,   0)		# first 	is red
 leds.colorLed(1, 255, 	127,   0)		# first 	is red
 leds.colorLed(2, 255, 	127,   0)		# first 	is red
-leds.colorLed(3, 55, 	127,   0)		# first 	is red
-leds.colorLed(4, 25, 	127,   0)		# first 	is red
-leds.colorLed(5, 25, 	127,   0)		# first 	is red
 
 leds.writeAll()
 time.sleep(1)
@@ -25,14 +22,14 @@ time.sleep(1)
 # colors range from 0 to 255 (the size of a byte)
 leds.colorLed(0, 0, 	 	0,   255)		# first 	is blue
 leds.colorLed(1, 0, 	 	0,   255)		# first 	is blue
-leds.colorLed(1, 0, 	 	0,   255)		# first 	is blue
+leds.colorLed(2, 0, 	 	0,   255)		# first 	is blue
 leds.writeAll()
 time.sleep(1)
 
 # colors range from 0 to 255 (the size of a byte)
 leds.colorLed(0, 0,      255,   0)		# first 	is green
 leds.colorLed(1, 0,      255,   0)		# first 	is green
-leds.colorLed(1, 0,      255,   0)		# first 	is green
+leds.colorLed(2, 0,      255,   0)		# first 	is green
 leds.writeAll()
 time.sleep(1)
 
